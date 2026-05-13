@@ -34,6 +34,20 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     transition: var(--transition);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Tubes Background Canvas */
+.tubes-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    touch-action: none;
 }
 
 .container {
@@ -44,7 +58,8 @@ body {
 
 /* Navbar */
 .navbar {
-    background: var(--surface-color);
+    background: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(10px);
     padding: 1rem 0;
     position: sticky;
     top: 0;
@@ -128,7 +143,10 @@ body {
 /* Tabs */
 .tabs-section {
     padding: 2rem 0;
-    background: var(--surface-color);
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 10;
 }
 
 .tabs {
@@ -163,6 +181,11 @@ body {
 /* Projects Section */
 .projects-section {
     padding: 4rem 0;
+    position: relative;
+    z-index: 10;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(5px);
+    min-height: 100vh;
 }
 
 .projects-grid {
@@ -173,11 +196,12 @@ body {
 }
 
 .project-card {
-    background: var(--surface-color);
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
     padding: 2rem;
     border-radius: 20px;
     text-align: center;
-    border: 2px solid var(--border-color);
+    border: 2px solid rgba(99, 102, 241, 0.3);
     transition: var(--transition);
     cursor: pointer;
     animation: fadeIn 0.6s ease;
@@ -264,7 +288,8 @@ body {
 }
 
 .modal-content {
-    background: var(--surface-color);
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(10px);
     padding: 2rem;
     border-radius: 20px;
     max-width: 900px;
@@ -273,6 +298,7 @@ body {
     overflow-y: auto;
     position: relative;
     animation: slideUp 0.3s ease;
+    border: 2px solid rgba(99, 102, 241, 0.3);
 }
 
 .modal-close {
@@ -296,11 +322,14 @@ body {
 
 /* Footer */
 .footer {
-    background: var(--surface-color);
+    background: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(10px);
     padding: 2rem 0;
     text-align: center;
     border-top: 2px solid var(--primary-color);
     margin-top: 4rem;
+    position: relative;
+    z-index: 10;
 }
 
 .footer a {
