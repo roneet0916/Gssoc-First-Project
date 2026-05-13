@@ -746,7 +746,7 @@ function initCoinFlip() {
 
     function setCoinFace(isHeads, seed) {
         const targetY = isHeads ? 0 : 180;
-        const flipX = 360 * (4 + (seed % 3)) + 90;
+        const flipX = 360 * (4 + (seed % 3));
         const flipY = 360 * (3 + (seed % 2)) + targetY;
         coin.style.setProperty('--flip-x', `${flipX}deg`);
         coin.style.setProperty('--flip-y', `${flipY}deg`);
@@ -3206,6 +3206,7 @@ function initTowerOfHanoi() {
     let diskCount = 3;
     let moveCount = 0;
     let isAnimating = false;
+    let shouldStop = false;
     
     const towerX = [200, 400, 600];
     const baseY = 350;
@@ -3217,6 +3218,10 @@ function initTowerOfHanoi() {
         towers = [[], [], []];
         moveCount = 0;
         diskCount = parseInt(diskCountInput.value) || 3;
+
+        //Reset animation state
+        isAnimating = false;
+        solveBtn.disabled = false;
         
         for (let i = diskCount; i >= 1; i--) {
             towers[0].push(i);
@@ -3270,6 +3275,8 @@ function initTowerOfHanoi() {
     }
     
     async function moveDisk(from, to) {
+        if(shouldStop) return;
+
         const disk = towers[from].pop();
         towers[to].push(disk);
         moveCount++;
@@ -3302,13 +3309,18 @@ function initTowerOfHanoi() {
         solveBtn.disabled = true;
         
         await solveHanoi(diskCount, 0, 2, 1);
+
+        shouldStop = false;
         
         isAnimating = false;
         solveBtn.disabled = false;
     }
     
     solveBtn.addEventListener('click', solve);
-    resetBtn.addEventListener('click', initTowers);
+    resetBtn.addEventListener('click', () => {
+        shouldStop = true;
+        initTowers();
+    });
     diskCountInput.addEventListener('change', initTowers);
     
     initTowers();
